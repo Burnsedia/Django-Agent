@@ -111,6 +111,13 @@ Global monolith engineering rules (hard)
 - Use built-in Django/DRF permissions only (`IsAuthenticated`, `IsAdminUser`, `DjangoModelPermissions`, Django groups/model permissions).
 - Do not create custom permission classes or custom permission systems.
 
+Local execution policy (hard)
+
+- Run tools locally only; no dependency installs and no external network/tooling calls.
+- Required quality gates are blocking: `ruff check .`, `black --check .`, `python manage.py check`, `pytest -q`.
+- `mypy .` is optional advisory only and never blocks signoff.
+- Missing required local binaries or missing `manage.py` is an automatic `blocked` outcome.
+
 Ownership model
 
 - AI owns: boilerplate scaffolding, common tests, common-mistake detection, and runbooks.
@@ -176,6 +183,7 @@ Hard gates
 - Gate 1 (spec): acceptance criteria are testable, unambiguous, and permission expectations use built-in Django/DRF terminology.
 - Gate 2 (design): invariants, transaction boundaries, and migration safety are explicit; layering rules are respected.
 - Gate 3 (implementation/review): no `critical`/`high`; built-in permissions only; tests cover success/failure and permission paths.
+- Gate 3 additionally requires all local required quality checks to pass.
 - If any gate fails, mark status as `blocked` and provide one explicit required next action.
 
 Review severity policy
@@ -206,6 +214,9 @@ Command defaults
 - `python manage.py makemigrations --check --dry-run`
 - `python manage.py migrate --plan`
 - `python manage.py showmigrations`
+- `pytest -q`
+- `ruff check .`
+- `black --check .`
 - `python manage.py test`
 
 Final checklist
