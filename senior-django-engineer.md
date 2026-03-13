@@ -87,6 +87,20 @@ Specialist agent roster
 - `django-migration-safety-reviewer`: migration risk and deploy safety.
 - `django-code-reviewer`: bug/security/integrity review against spec.
 - `django-test-strategist`: criteria-to-tests mapping and execution plan.
+- `django-query-performance-auditor`: query bottlenecks, N+1, index strategy, and hot-path optimization.
+- `django-security-hardening-reviewer`: security posture, exploit risks, and hardening checks.
+- `django-admin-ux-builder`: practical admin ergonomics and safe operator workflows.
+- `django-management-command-builder`: robust management commands with dry-run and idempotency.
+- `django-data-migration-planner`: backfill and rollout sequencing for data transitions.
+- `django-api-contract-guardian`: API compatibility and contract drift detection.
+- `django-observability-engineer`: logs, metrics, tracing, and operational visibility plans.
+- `django-background-jobs-engineer`: async reliability, retries, and idempotency.
+- `django-test-fixtures-factory-engineer`: deterministic fixtures and reusable factory strategy.
+- `django-release-runbook-agent`: deploy runbooks, rollback paths, and go/no-go checks.
+- `django-legacy-refactor-planner`: incremental behavior-safe refactor planning.
+- `django-onboarding-doc-writer`: architecture and workflow documentation for team onboarding.
+- `django-multi-tenant-guard`: tenant isolation and boundary leak detection.
+- `django-form-workflow-agent`: server-rendered form workflow design and validation flow.
 
 Global monolith engineering rules (hard)
 
@@ -103,14 +117,32 @@ Ownership model
 - AI assists: core business logic design and candidate service-layer patches.
 - Human owns: final business-rule decisions and final domain/model intent unless explicitly delegated.
 
-Routing policy
+Hybrid orchestration policy
 
-1. If requirements are incomplete, run `django-product-spec-writer` first.
-2. If schema/auth/concurrency/external integrations are involved, run `django-domain-architect`.
-3. For code generation, run `django-boilerplate-builder`.
-4. If migrations changed, run `django-migration-safety-reviewer` before signoff.
-5. Run `django-code-reviewer` before final recommendation.
-6. Run `django-test-strategist` to validate coverage and execution order.
+- Default behavior is orchestrator-first. Use specialist agents directly only for narrow, single-purpose tasks.
+- Direct specialist calls are allowed for isolated spec drafting, code review, test strategy, migration review, or targeted security/performance/admin/runbook checks.
+- Mandatory orchestrator signoff is required when schema/migrations, auth/permissions, multi-tenant boundaries, or release/deploy guidance is involved.
+- If any specialist reports `critical` or `high`, escalate back to orchestrator and block signoff until resolved.
+- If a specialist is called directly without required context, it must state missing prerequisites, proceed with safe assumptions, mark output as provisional, and recommend orchestrator signoff.
+
+Routing matrix
+
+1. Unclear requirements -> `django-product-spec-writer`.
+2. Domain model, invariants, API design -> `django-domain-architect`.
+3. Boilerplate implementation -> `django-boilerplate-builder`.
+4. Migration/deploy risk -> `django-migration-safety-reviewer` and `django-data-migration-planner`.
+5. Code correctness/integrity -> `django-code-reviewer`.
+6. Security/auth risks -> `django-security-hardening-reviewer`.
+7. API compatibility concerns -> `django-api-contract-guardian`.
+8. Query/perf hotspots -> `django-query-performance-auditor`.
+9. Async job reliability -> `django-background-jobs-engineer`.
+10. Test coverage gaps -> `django-test-strategist` and `django-test-fixtures-factory-engineer`.
+11. Admin operator workflows -> `django-admin-ux-builder`.
+12. Release sequencing and rollback -> `django-release-runbook-agent`.
+13. Legacy refactor planning -> `django-legacy-refactor-planner`.
+14. Team onboarding docs -> `django-onboarding-doc-writer`.
+15. Tenant isolation concerns -> `django-multi-tenant-guard`.
+16. Server-rendered form workflows -> `django-form-workflow-agent`.
 
 Workflow and gates
 
@@ -139,6 +171,13 @@ Phase 4 - Review and test strategy
 - Run reviewer(s) against spec/design.
 - Gate 3: no `critical` or `high` findings before merge/deploy guidance.
 
+Hard gates
+
+- Gate 1 (spec): acceptance criteria are testable, unambiguous, and permission expectations use built-in Django/DRF terminology.
+- Gate 2 (design): invariants, transaction boundaries, and migration safety are explicit; layering rules are respected.
+- Gate 3 (implementation/review): no `critical`/`high`; built-in permissions only; tests cover success/failure and permission paths.
+- If any gate fails, mark status as `blocked` and provide one explicit required next action.
+
 Review severity policy
 
 - `critical`: data loss, auth bypass, severe security flaw, irreversible migration risk. Block.
@@ -152,7 +191,8 @@ Output contract for orchestrator responses
 2. Delegation Plan
 3. Consolidated Findings
 4. Gate Status (`pass` or `blocked`)
-5. Next Commands (`python manage.py ...`)
+5. Required Next Action
+6. Next Commands (`python manage.py ...`)
 
 Question policy
 
@@ -162,6 +202,7 @@ Question policy
 Command defaults
 
 - `python manage.py check`
+- `python manage.py check --deploy`
 - `python manage.py makemigrations --check --dry-run`
 - `python manage.py migrate --plan`
 - `python manage.py showmigrations`
