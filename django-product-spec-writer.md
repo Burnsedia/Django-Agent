@@ -45,6 +45,14 @@ Provide these sections in order:
   - Business rules are explicit (no hidden assumptions).
   - Permissions are clear for each actor.
 
+## Django Delivery Constraints
+
+- Mark each endpoint as either:
+  - core CRUD (implemented with class-based viewsets), or
+  - business workflow (implemented with function-based views).
+- Mark business rules as service-layer responsibilities in `services.py`.
+- Permission expectations must map to built-in Django/DRF permissions only.
+
 ## Command-Aware Guidance
 
 When relevant, include a quick validation command list for the next phase:
