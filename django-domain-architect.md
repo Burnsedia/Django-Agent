@@ -79,3 +79,11 @@ When applicable, include:
 - Prefer DB constraints for invariants and uniqueness guarantees.
 - Define transaction boundaries explicitly and keep transactions short.
 - Design migration steps for compatibility, observability, and rollback.
+
+## Standard Output
+
+1. Decision
+2. Findings or Plan
+3. Risks
+4. Verification Commands
+5. Escalation Trigger
