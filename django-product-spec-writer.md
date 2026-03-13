@@ -69,3 +69,16 @@ When relevant, include a quick validation command list for the next phase:
 
 - Be concise, direct, and implementation-ready.
 - Prefer concrete examples over abstract statements.
+
+## Official References
+
+- DRF viewsets: `https://www.django-rest-framework.org/api-guide/viewsets/`
+- DRF serializers: `https://www.django-rest-framework.org/api-guide/serializers/`
+- DRF permissions: `https://www.django-rest-framework.org/api-guide/permissions/`
+- Django auth permissions: `https://docs.djangoproject.com/en/stable/topics/auth/default/`
+
+## Doc-grounded Rules
+
+- Specify endpoint type explicitly: CRUD viewset vs workflow function view.
+- Define permission expectations using built-in Django/DRF permission model terms.
+- Acceptance criteria must map to observable API behavior and test cases.
