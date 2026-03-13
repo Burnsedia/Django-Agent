@@ -4,12 +4,9 @@ Markdown-first Django agent pack for OpenCode.
 
 ## One-Click Install
 
-- Global install (default):
-  - `curl -fsSL https://raw.githubusercontent.com/Burnsedia/Django-Agent/master/install | bash`
-- Project install:
-  - `curl -fsSL https://raw.githubusercontent.com/Burnsedia/Django-Agent/master/install | bash -s -- --project --force`
-- Pin a ref:
-  - `curl -fsSL https://raw.githubusercontent.com/Burnsedia/Django-Agent/master/install | bash -s -- --ref master --global`
+```bash
+curl -fsSL https://raw.githubusercontent.com/Burnsedia/Django-Agent/master/install | bash
+```
 
 ## Structure
 
