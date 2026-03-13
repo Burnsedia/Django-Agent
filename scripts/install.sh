@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 TARGET_SCOPE="project"
+TARGET_BASE=""
 DRY_RUN=0
 FORCE=0
 INSTALL_AGENTS=1
@@ -17,11 +18,12 @@ usage() {
 Install Django Agent Suite into OpenCode directories.
 
 Usage:
-  ./scripts/install.sh [--project|--global] [--agents|--commands|--skills|--tools|--all] [--dry-run] [--force]
+  ./scripts/install.sh [--project|--global] [--target-base <path>] [--agents|--commands|--skills|--tools|--all] [--dry-run] [--force]
 
 Flags:
   --project   Install to .opencode/ (default)
   --global    Install to ~/.config/opencode/
+  --target-base <path>  Override install base directory (for automation/bootstrap)
   --agents    Install only agents
   --commands  Install only OpenCode commands
   --skills    Install only skills
@@ -36,6 +38,14 @@ while [[ $# -gt 0 ]]; do
   case "$1" in
     --project) TARGET_SCOPE="project" ;;
     --global) TARGET_SCOPE="global" ;;
+    --target-base)
+      if [[ $# -lt 2 ]]; then
+        echo "Missing value for --target-base" >&2
+        exit 1
+      fi
+      TARGET_BASE="$2"
+      shift
+      ;;
     --agents)
       INSTALL_AGENTS=1
       INSTALL_COMMANDS=0
@@ -79,7 +89,9 @@ if [[ "${INSTALL_AGENTS}" -eq 0 && "${INSTALL_COMMANDS}" -eq 0 && "${INSTALL_SKI
   exit 1
 fi
 
-if [[ "${TARGET_SCOPE}" == "global" ]]; then
+if [[ -n "${TARGET_BASE}" ]]; then
+  BASE_DIR="${TARGET_BASE}"
+elif [[ "${TARGET_SCOPE}" == "global" ]]; then
   BASE_DIR="${HOME}/.config/opencode"
 else
   BASE_DIR="${REPO_ROOT}/.opencode"
