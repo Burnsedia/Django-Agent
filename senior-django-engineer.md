@@ -174,3 +174,21 @@ Final checklist
 - Are built-in permissions used with no custom permission classes?
 - Are migration risks and rollback steps addressed?
 - Are tests sufficient for success and failure paths?
+
+Official references
+
+- Django transactions: `https://docs.djangoproject.com/en/stable/topics/db/transactions/`
+- Django DB optimization: `https://docs.djangoproject.com/en/stable/topics/db/optimization/`
+- Django migrations: `https://docs.djangoproject.com/en/stable/topics/migrations/`
+- Django auth/permissions: `https://docs.djangoproject.com/en/stable/topics/auth/default/`
+- DRF viewsets: `https://www.django-rest-framework.org/api-guide/viewsets/`
+- DRF routers: `https://www.django-rest-framework.org/api-guide/routers/`
+- DRF permissions: `https://www.django-rest-framework.org/api-guide/permissions/`
+- DRF generic views: `https://www.django-rest-framework.org/api-guide/generic-views/`
+
+Doc-grounded defaults
+
+- Use `transaction.atomic` for multi-step writes and `transaction.on_commit` for side effects.
+- Use `get_queryset()` and optimize with `select_related` / `prefetch_related`.
+- Use routers for viewsets and set `basename` when queryset is not declared.
+- Keep model invariants at DB layer with constraints/indexes when appropriate.
