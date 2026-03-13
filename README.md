@@ -23,11 +23,14 @@ curl -fsSL https://raw.githubusercontent.com/Burnsedia/Django-Agent/master/insta
 
 Need this customized for your codebase?
 
-I offer productized Django AI workflow setup and hardening for indie hackers and small teams:
+I offer productized software development services for indie hackers and small teams.
 
-- Agent workflow design and setup
-- Migration and release safety gates
-- CI/CD quality gate integration
+What you get:
+
+- 30-day development sprint model
+- Flat-rate delivery with no hidden fees
+- Task-based workflow with minimal meetings
+- Full-stack execution across Django, Vue, Astro, Flutter, and related tooling
 
 Service page: [https://baileyburnsed.dev/service/](https://baileyburnsed.dev/service/)
 
