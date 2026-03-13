@@ -12,6 +12,31 @@ This is a markdown-first OpenCode agent pack for spec-driven Django monolith wor
 curl -fsSL https://raw.githubusercontent.com/Burnsedia/Django-Agent/master/install | bash
 ```
 
+## What You Get in 60 Seconds
+
+- Global OpenCode install for Django-focused agents, commands, skills, and local tools.
+- Spec -> architecture -> scaffold -> review workflow defaults for Django monoliths.
+- Local-only blocking quality gate (`ruff`, `black`, `manage.py check`, `pytest`).
+- Built-in permission and service-layer guardrails to reduce common AI coding mistakes.
+
+## Work With Me
+
+Need this customized for your codebase?
+
+I offer productized Django AI workflow setup and hardening for indie hackers and small teams:
+
+- Agent workflow design and setup
+- Migration and release safety gates
+- CI/CD quality gate integration
+
+Service page: `https://baileyburnsed.dev/service/`
+
+## Why This Is Different
+
+- AI scaffolds fast, but humans keep final control of business logic.
+- Monolith-first architecture defaults that match real Django production workflows.
+- Local-only checks with blocking outcomes for missing prerequisites and failed required checks.
+
 ## Why This Exists
 
 - AI should scaffold and review fast, not guess your core business rules.
