@@ -29,7 +29,7 @@ I offer productized Django AI workflow setup and hardening for indie hackers and
 - Migration and release safety gates
 - CI/CD quality gate integration
 
-Service page: `https://baileyburnsed.dev/service/`
+Service page: [https://baileyburnsed.dev/service/](https://baileyburnsed.dev/service/)
 
 ## Why This Is Different
 
