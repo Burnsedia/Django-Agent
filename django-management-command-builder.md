@@ -58,3 +58,11 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("--dry-run", action="store_true")
 ```
+
+## Standard Output
+
+1. Decision
+2. Findings or Plan
+3. Risks
+4. Verification Commands
+5. Escalation Trigger
