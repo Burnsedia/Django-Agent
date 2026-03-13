@@ -3,6 +3,7 @@ set -euo pipefail
 
 REPO="Burnsedia/Django-Agent"
 REF="master"
+CALLER_DIR="$PWD"
 
 TARGET="--global"
 declare -a PASSTHRU_FLAGS=()
@@ -12,6 +13,7 @@ usage() {
 Bootstrap installer for Django Agent Suite.
 
 Defaults to global install (~/.config/opencode).
+When using --project, installs into the current directory's .opencode.
 
 Usage:
   bash install [--project|--global] [--agents|--commands|--skills|--tools|--all] [--force] [--dry-run] [--ref <ref>]
@@ -84,6 +86,10 @@ if [[ ! -x "${INSTALLER}" ]]; then
 fi
 
 echo "Running installer (${TARGET})..."
-bash "${INSTALLER}" "${TARGET}" "${PASSTHRU_FLAGS[@]}"
+if [[ "${TARGET}" == "--project" ]]; then
+  bash "${INSTALLER}" "${TARGET}" --target-base "${CALLER_DIR}/.opencode" "${PASSTHRU_FLAGS[@]}"
+else
+  bash "${INSTALLER}" "${TARGET}" "${PASSTHRU_FLAGS[@]}"
+fi
 
 echo "Bootstrap install complete."
