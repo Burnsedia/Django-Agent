@@ -58,3 +58,17 @@ You are a senior Django reviewer for monolith codebases.
 
 - `python manage.py check`
 - `python manage.py test`
+
+## Official References
+
+- Django security: `https://docs.djangoproject.com/en/stable/topics/security/`
+- Django auth permissions: `https://docs.djangoproject.com/en/stable/topics/auth/default/`
+- DRF permissions: `https://www.django-rest-framework.org/api-guide/permissions/`
+- DRF viewsets: `https://www.django-rest-framework.org/api-guide/viewsets/`
+- DRF generic views: `https://www.django-rest-framework.org/api-guide/generic-views/`
+
+## Doc-grounded Rules
+
+- Verify object permission checks where object retrieval is customized.
+- Verify queryset optimization for list endpoints with related fields.
+- Treat custom permission systems as violations unless explicitly requested.
